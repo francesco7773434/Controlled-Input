@@ -1,31 +1,20 @@
 import { Card } from "react-bootstrap";
 import { Component } from "react";
+import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
   state = {
     selected: false,
   };
 
-  toggleSelect = () => {
-    this.setState((prevState) => ({ selected: !prevState.selected }));
-  };
-
   render() {
-    const { book } = this.props;
     return (
-      <Card className={`bg-dark border-3 w-50 ${this.state.selected ? "border border-danger" : ""}`} onClick={this.toggleSelect}>
-        <Card.Img
-          variant="top"
-          src={book.img}
-          alt={book.title}
-          onClick={(e) => {
-            e.stopPropagation();
-            this.toggleSelect();
-          }}
-        />
+      <Card className={this.state.selected ? "border-danger" : "border-2"}>
+        <Card.Img variant="top" src={this.props.book.img} alt={this.props.book.title} onClick={() => this.setState({ selected: true })} />
         <Card.Body className="bg-dark">
-          <Card.Title className="text-white">{book.title}</Card.Title>
+          <Card.Title className="text-white">{this.props.book.title}</Card.Title>
         </Card.Body>
+        {this.state.selected && <CommentArea bookId={this.props.book.asin} />}
       </Card>
     );
   }
