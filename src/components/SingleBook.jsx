@@ -1,23 +1,22 @@
+import { useState } from "react";
 import { Card } from "react-bootstrap";
-import { Component } from "react";
-import CommentArea from "./CommentArea";
 
-class SingleBook extends Component {
-  state = {
-    selected: false,
+const SingleBook = ({ book, onSelect }) => {
+  const [selected, setSelected] = useState(false);
+
+  const handleClick = () => {
+    setSelected(!selected);
+    onSelect(book.asin);
   };
 
-  render() {
-    return (
-      <Card className={this.state.selected ? "border-danger" : "border-2"}>
-        <Card.Img variant="top" src={this.props.book.img} alt={this.props.book.title} onClick={() => this.setState({ selected: true })} />
-        <Card.Body className="bg-dark">
-          <Card.Title className="text-white">{this.props.book.title}</Card.Title>
-        </Card.Body>
-        {this.state.selected && <CommentArea bookId={this.props.book.asin} />}
-      </Card>
-    );
-  }
-}
+  return (
+    <Card onClick={handleClick} style={{ border: selected ? "3px solid red" : "1px solid gray", cursor: "pointer" }}>
+      <Card.Img variant="top" src={book.img} />
+      <Card.Body>
+        <Card.Title>{book.title}</Card.Title>
+      </Card.Body>
+    </Card>
+  );
+};
 
 export default SingleBook;

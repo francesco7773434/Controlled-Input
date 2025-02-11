@@ -4,7 +4,7 @@ import BookList from "./components/BookList";
 import FooterComponent from "./components/MyFooter";
 
 import TopBar from "./components/TopBar";
-import fantasy from "./data/fantasy.json";
+
 import horror from "./data/horror.json";
 
 function App() {
@@ -13,7 +13,6 @@ function App() {
       <TopBar title="Biblioteca" claim="libreria di Frank" />
       <FooterComponent />
 
-      <BookList books={fantasy} />
       <BookList books={horror} />
     </>
   );
